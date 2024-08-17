@@ -423,7 +423,7 @@ func (t *Text) runAccessible() error {
 }
 
 // WithTheme sets the theme on a text field.
-func (t *Text) WithTheme(theme *Theme) Field {
+func (t *Text) WithTheme(theme *Theme) Field[any] {
 	if t.theme != nil {
 		return t
 	}
@@ -432,27 +432,27 @@ func (t *Text) WithTheme(theme *Theme) Field {
 }
 
 // WithKeyMap sets the keymap on a text field.
-func (t *Text) WithKeyMap(k *KeyMap) Field {
+func (t *Text) WithKeyMap(k *KeyMap) Field[any] {
 	t.keymap = k.Text
 	t.textarea.KeyMap.InsertNewline.SetKeys(t.keymap.NewLine.Keys()...)
 	return t
 }
 
 // WithAccessible sets the accessible mode of the text field.
-func (t *Text) WithAccessible(accessible bool) Field {
+func (t *Text) WithAccessible(accessible bool) Field[any] {
 	t.accessible = accessible
 	return t
 }
 
 // WithWidth sets the width of the text field.
-func (t *Text) WithWidth(width int) Field {
+func (t *Text) WithWidth(width int) Field[any] {
 	t.width = width
 	t.textarea.SetWidth(width - t.activeStyles().Base.GetHorizontalFrameSize())
 	return t
 }
 
 // WithHeight sets the height of the text field.
-func (t *Text) WithHeight(height int) Field {
+func (t *Text) WithHeight(height int) Field[any] {
 	adjust := 0
 	if t.title.val != "" {
 		adjust++
@@ -465,7 +465,7 @@ func (t *Text) WithHeight(height int) Field {
 }
 
 // WithPosition sets the position information of the text field.
-func (t *Text) WithPosition(p FieldPosition) Field {
+func (t *Text) WithPosition(p FieldPosition) Field[any] {
 	t.keymap.Prev.SetEnabled(!p.IsFirst())
 	t.keymap.Next.SetEnabled(!p.IsLast())
 	t.keymap.Submit.SetEnabled(p.IsLast())

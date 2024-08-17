@@ -27,18 +27,18 @@ type PointerAccessor[T any] struct {
 }
 
 // NewPointerAccessor returns a new pointer accessor.
-func NewPointerAccessor[T any](value *T) *PointerAccessor[T] {
+func NewPointerAccessor[T any](value T) *PointerAccessor[T] {
 	return &PointerAccessor[T]{
-		value: value,
+		value: &value,
 	}
 }
 
 // Get gets the value.
-func (a *PointerAccessor[T]) Get() T {
+func (a *PointerAccessor) Get() any {
 	return *a.value
 }
 
 // Set sets the value.
-func (a *PointerAccessor[T]) Set(value T) {
+func (a *PointerAccessor) Set(value any) {
 	*a.value = value
 }

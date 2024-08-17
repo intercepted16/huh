@@ -334,7 +334,7 @@ func (f *FilePicker) runAccessible() error {
 }
 
 // WithTheme sets the theme of the file field.
-func (f *FilePicker) WithTheme(theme *Theme) Field {
+func (f *FilePicker) WithTheme(theme *Theme) Field[any] {
 	if f.theme != nil || theme == nil {
 		return f
 	}
@@ -359,7 +359,7 @@ func (f *FilePicker) WithTheme(theme *Theme) Field {
 }
 
 // WithKeyMap sets the keymap on a file field.
-func (f *FilePicker) WithKeyMap(k *KeyMap) Field {
+func (f *FilePicker) WithKeyMap(k *KeyMap) Field[any] {
 	f.keymap = k.FilePicker
 	f.picker.KeyMap = filepicker.KeyMap{
 		GoToTop:  k.FilePicker.GoToTop,
@@ -377,19 +377,19 @@ func (f *FilePicker) WithKeyMap(k *KeyMap) Field {
 }
 
 // WithAccessible sets the accessible mode of the file field.
-func (f *FilePicker) WithAccessible(accessible bool) Field {
+func (f *FilePicker) WithAccessible(accessible bool) Field[any] {
 	f.accessible = accessible
 	return f
 }
 
 // WithWidth sets the width of the file field.
-func (f *FilePicker) WithWidth(width int) Field {
+func (f *FilePicker) WithWidth(width int) Field[any] {
 	f.width = width
 	return f
 }
 
 // WithHeight sets the height of the file field.
-func (f *FilePicker) WithHeight(height int) Field {
+func (f *FilePicker) WithHeight(height int) Field[any] {
 	f.height = height
 	f.Height(height)
 	f.picker, _ = f.picker.Update(nil)
@@ -397,7 +397,7 @@ func (f *FilePicker) WithHeight(height int) Field {
 }
 
 // WithPosition sets the position of the file field.
-func (f *FilePicker) WithPosition(p FieldPosition) Field {
+func (f *FilePicker) WithPosition(p FieldPosition) Field[any] {
 	f.keymap.Prev.SetEnabled(!p.IsFirst())
 	f.keymap.Next.SetEnabled(!p.IsLast())
 	f.keymap.Submit.SetEnabled(p.IsLast())

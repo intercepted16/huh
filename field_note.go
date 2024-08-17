@@ -253,7 +253,7 @@ func (n *Note) runAccessible() error {
 }
 
 // WithTheme sets the theme on a note field.
-func (n *Note) WithTheme(theme *Theme) Field {
+func (n *Note) WithTheme(theme *Theme) Field[any] {
 	if n.theme != nil {
 		return n
 	}
@@ -262,34 +262,34 @@ func (n *Note) WithTheme(theme *Theme) Field {
 }
 
 // WithKeyMap sets the keymap on a note field.
-func (n *Note) WithKeyMap(k *KeyMap) Field {
+func (n *Note) WithKeyMap(k *KeyMap) Field[any] {
 	n.keymap = k.Note
 	return n
 }
 
 // WithAccessible sets the accessible mode of the note field.
-func (n *Note) WithAccessible(accessible bool) Field {
+func (n *Note) WithAccessible(accessible bool) Field[any] {
 	n.accessible = accessible
 	return n
 }
 
 // WithWidth sets the width of the note field.
-func (n *Note) WithWidth(width int) Field {
+func (n *Note) WithWidth(width int) Field[any] {
 	n.width = width
 	return n
 }
 
 // WithHeight sets the height of the note field.
-func (n *Note) WithHeight(height int) Field {
+func (n *Note) WithHeight(height int) Field[any] {
 	n.Height(height)
 	return n
 }
 
 // WithPosition sets the position information of the note field.
-func (n *Note) WithPosition(p FieldPosition) Field {
+func (n *Note) WithPosition(p FieldPosition) Field[any] {
 	// if the note is the only field on the screen,
 	// we shouldn't skip the entire group.
-	if p.Field == p.FirstField && p.Field == p.LastField {
+	if p.Field == p.FirstField && p.Field == p.LastField[any] {
 		n.skip = false
 	}
 	n.keymap.Prev.SetEnabled(!p.IsFirst())

@@ -671,7 +671,7 @@ func (s *Select[T]) runAccessible() error {
 }
 
 // WithTheme sets the theme of the select field.
-func (s *Select[T]) WithTheme(theme *Theme) Field {
+func (s *Select[T]) WithTheme(theme *Theme) Field[any] {
 	if s.theme != nil {
 		return s
 	}
@@ -686,7 +686,7 @@ func (s *Select[T]) WithTheme(theme *Theme) Field {
 }
 
 // WithKeyMap sets the keymap on a select field.
-func (s *Select[T]) WithKeyMap(k *KeyMap) Field {
+func (s *Select[T]) WithKeyMap(k *KeyMap) Field[any] {
 	s.keymap = k.Select
 	s.keymap.Left.SetEnabled(s.inline)
 	s.keymap.Right.SetEnabled(s.inline)
@@ -696,24 +696,24 @@ func (s *Select[T]) WithKeyMap(k *KeyMap) Field {
 }
 
 // WithAccessible sets the accessible mode of the select field.
-func (s *Select[T]) WithAccessible(accessible bool) Field {
+func (s *Select[T]) WithAccessible(accessible bool) Field[any] {
 	s.accessible = accessible
 	return s
 }
 
 // WithWidth sets the width of the select field.
-func (s *Select[T]) WithWidth(width int) Field {
+func (s *Select[T]) WithWidth(width int) Field[any] {
 	s.width = width
 	return s
 }
 
 // WithHeight sets the height of the select field.
-func (s *Select[T]) WithHeight(height int) Field {
+func (s *Select[T]) WithHeight(height int) Field[any] {
 	return s.Height(height)
 }
 
 // WithPosition sets the position of the select field.
-func (s *Select[T]) WithPosition(p FieldPosition) Field {
+func (s *Select[T]) WithPosition(p FieldPosition) Field[any] {
 	if s.filtering {
 		return s
 	}

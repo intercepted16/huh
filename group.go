@@ -18,7 +18,7 @@ import (
 // progress to the next group.
 type Group struct {
 	// collection of fields
-	selector *selector.Selector[Field]
+	selector *selector.Selector[Field[any]]
 
 	// information
 	title       string
@@ -43,7 +43,7 @@ type Group struct {
 }
 
 // NewGroup returns a new group with the given fields.
-func NewGroup(fields ...Field) *Group {
+func NewGroup(fields ...Field[any]) *Group {
 	selector := selector.NewSelector(fields)
 	group := &Group{
 		selector:   selector,

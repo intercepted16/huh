@@ -86,7 +86,7 @@ func (c *Confirm) Negative(negative string) *Confirm {
 
 // Value sets the value of the confirm field.
 func (c *Confirm) Value(value *bool) *Confirm {
-	return c.Accessor(NewPointerAccessor(value))
+	return c.Accessor(NewPointerAccessor[bool](value))
 }
 
 // Accessor sets the accessor of the confirm field.
@@ -310,7 +310,7 @@ func (c *Confirm) String() string {
 }
 
 // WithTheme sets the theme of the confirm field.
-func (c *Confirm) WithTheme(theme *Theme) Field {
+func (c *Confirm) WithTheme(theme *Theme) Field[any] {
 	if c.theme != nil {
 		return c
 	}
@@ -319,31 +319,31 @@ func (c *Confirm) WithTheme(theme *Theme) Field {
 }
 
 // WithKeyMap sets the keymap of the confirm field.
-func (c *Confirm) WithKeyMap(k *KeyMap) Field {
+func (c *Confirm) WithKeyMap(k *KeyMap) Field[any] {
 	c.keymap = k.Confirm
 	return c
 }
 
 // WithAccessible sets the accessible mode of the confirm field.
-func (c *Confirm) WithAccessible(accessible bool) Field {
+func (c *Confirm) WithAccessible(accessible bool) Field[any] {
 	c.accessible = accessible
 	return c
 }
 
 // WithWidth sets the width of the confirm field.
-func (c *Confirm) WithWidth(width int) Field {
+func (c *Confirm) WithWidth(width int) Field[any] {
 	c.width = width
 	return c
 }
 
 // WithHeight sets the height of the confirm field.
-func (c *Confirm) WithHeight(height int) Field {
+func (c *Confirm) WithHeight(height int) Field[any] {
 	c.height = height
 	return c
 }
 
 // WithPosition sets the position of the confirm field.
-func (c *Confirm) WithPosition(p FieldPosition) Field {
+func (c *Confirm) WithPosition(p FieldPosition) Field[any] {
 	c.keymap.Prev.SetEnabled(!p.IsFirst())
 	c.keymap.Next.SetEnabled(!p.IsLast())
 	c.keymap.Submit.SetEnabled(p.IsLast())

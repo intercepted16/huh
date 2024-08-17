@@ -127,7 +127,7 @@ func NewForm(groups ...*Group) *Form {
 // confirm button, select option, etc...
 //
 // Each field implements the Bubble Tea Model interface.
-type Field interface {
+type Field[T any] interface {
 	// Bubble Tea Model
 	Init() tea.Cmd
 	Update(tea.Msg) (tea.Model, tea.Cmd)
@@ -154,28 +154,28 @@ type Field interface {
 	KeyBinds() []key.Binding
 
 	// WithTheme sets the theme on a field.
-	WithTheme(*Theme) Field
+	WithTheme(*Theme) Field[T]
 
 	// WithAccessible sets whether the field should run in accessible mode.
-	WithAccessible(bool) Field
+	WithAccessible(bool) Field[T]
 
 	// WithKeyMap sets the keymap on a field.
-	WithKeyMap(*KeyMap) Field
+	WithKeyMap(*KeyMap) Field[T]
 
 	// WithWidth sets the width of a field.
-	WithWidth(int) Field
+	WithWidth(int) Field[T]
 
 	// WithHeight sets the height of a field.
-	WithHeight(int) Field
+	WithHeight(int) Field[T]
 
 	// WithPosition tells the field the index of the group and position it is in.
-	WithPosition(FieldPosition) Field
+	WithPosition(FieldPosition) Field[T]
 
 	// GetKey returns the field's key.
 	GetKey() string
 
 	// GetValue returns the field's value.
-	GetValue() any
+	GetValue() T
 }
 
 // FieldPosition is positional information about the given field and form.
@@ -371,7 +371,7 @@ func (f *Form) UpdateFieldPositions() *Form {
 	f.selector.Range(func(g int, group *Group) bool {
 		// determine the first non-skippable field.
 		var firstField int
-		group.selector.Range(func(_ int, field Field) bool {
+		group.selector.Range(func(_ int, field Field[any]) bool {
 			if !field.Skip() || group.selector.Total() == 1 {
 				return false
 			}
@@ -381,7 +381,7 @@ func (f *Form) UpdateFieldPositions() *Form {
 
 		// determine the last non-skippable field.
 		var lastField int
-		group.selector.ReverseRange(func(i int, field Field) bool {
+		group.selector.ReverseRange(func(i int, field Field[any]) bool {
 			lastField = i
 			if !field.Skip() || group.selector.Total() == 1 {
 				return false
@@ -389,7 +389,7 @@ func (f *Form) UpdateFieldPositions() *Form {
 			return true
 		})
 
-		group.selector.Range(func(i int, field Field) bool {
+		group.selector.Range(func(i int, field Field[any]) bool {
 			field.WithPosition(FieldPosition{
 				Group:      g,
 				Field:      i,
@@ -662,7 +662,7 @@ func (f *Form) runAccessible() error {
 	}
 
 	f.selector.Range(func(_ int, group *Group) bool {
-		group.selector.Range(func(_ int, field Field) bool {
+		group.selector.Range(func(_ int, field Field[any]) bool {
 			field.Init()
 			field.Focus()
 			_ = field.WithAccessible(true).Run()

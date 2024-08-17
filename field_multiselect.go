@@ -697,7 +697,7 @@ func (m *MultiSelect[T]) runAccessible() error {
 }
 
 // WithTheme sets the theme of the multi-select field.
-func (m *MultiSelect[T]) WithTheme(theme *Theme) Field {
+func (m *MultiSelect[T]) WithTheme(theme *Theme) Field[any] {
 	if m.theme != nil {
 		return m
 	}
@@ -712,7 +712,7 @@ func (m *MultiSelect[T]) WithTheme(theme *Theme) Field {
 }
 
 // WithKeyMap sets the keymap of the multi-select field.
-func (m *MultiSelect[T]) WithKeyMap(k *KeyMap) Field {
+func (m *MultiSelect[T]) WithKeyMap(k *KeyMap) Field[any] {
 	m.keymap = k.MultiSelect
 	if !m.filterable {
 		m.keymap.Filter.SetEnabled(false)
@@ -723,26 +723,26 @@ func (m *MultiSelect[T]) WithKeyMap(k *KeyMap) Field {
 }
 
 // WithAccessible sets the accessible mode of the multi-select field.
-func (m *MultiSelect[T]) WithAccessible(accessible bool) Field {
+func (m *MultiSelect[T]) WithAccessible(accessible bool) Field[any] {
 	m.accessible = accessible
 	return m
 }
 
 // WithWidth sets the width of the multi-select field.
-func (m *MultiSelect[T]) WithWidth(width int) Field {
+func (m *MultiSelect[T]) WithWidth(width int) Field[any] {
 	m.width = width
 	return m
 }
 
 // WithHeight sets the total height of the multi-select field. Including padding
 // and help menu heights.
-func (m *MultiSelect[T]) WithHeight(height int) Field {
+func (m *MultiSelect[T]) WithHeight(height int) Field[any] {
 	m.Height(height)
 	return m
 }
 
 // WithPosition sets the position of the multi-select field.
-func (m *MultiSelect[T]) WithPosition(p FieldPosition) Field {
+func (m *MultiSelect[T]) WithPosition(p FieldPosition) Field[any] {
 	if m.filtering {
 		return m
 	}
